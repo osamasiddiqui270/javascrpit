@@ -21,36 +21,19 @@ function showsuccess(input,postMessage){
 const formControl = input.parentElement;
 formControl.className = 'form-control success';	
 }
+//chech required
+function checkrequired(inputArr){
+	inputArr.forEach(function(input) {
+		console.log(input.value);
+	});
+}
 
 //Event listener
 form.addEventListener('submit',function(e){
 	e.preventDefault();
+
+	 checkrequired([username,email,password,password2]);
 	
-	if(username.value === ''){
-		showerror(username, 'Username is required');
-	}else{
-		showsuccess(username);
-	}
-	
-	if(email.value === ''){
-		showerror(email, 'Email is required');
-	}else if(!checkemail(email.value)) {
-		showerror(email, 'Email is not valid');
-	}else{
-		showsuccess(email);
-	}
-	
-	if(password.value === ''){
-		showerror(password, 'Password is required');
-	}else{
-		showsuccess(password);
-	}
-	
-	if(password2.value === ''){
-		showerror(password2, 'Password2 is required');
-	}else{
-		showsuccess(password2);
-	}
 	
 });
 
