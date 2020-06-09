@@ -24,8 +24,16 @@ formControl.className = 'form-control success';
 //chech required
 function checkrequired(inputArr){
 	inputArr.forEach(function(input) {
-		console.log(input.value);
+		if(input.value.trim()===''){
+			showerror(input, `${getFieldName(input)} is required`)
+		}else{
+			showsuccess(input);
+		}
 	});
+}
+//get field name
+function getFieldName(input){
+	return input.id.charAt(0).toUpperCase() + input.id.slice(1);
 }
 
 //Event listener
