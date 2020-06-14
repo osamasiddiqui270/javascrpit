@@ -9,8 +9,14 @@ let ticketprice = +movieselect.value;
 
 //update totak and count
 
-function updateselectedcount(){
+function updateselectedcount() {
 const selectedseats	= document.querySelectorAll('.row .seat.selected');
+
+const seatsIndex = [...selectedseats].map(function(seat){
+ return[...seats].indexOf(seat);
+});
+	
+console.log(seatsIndex);	
 	
 const selectedseatscount = selectedseats.length;
 	
@@ -31,5 +37,6 @@ container.addEventListener ('click', function(e){
 	if(e.target.classList.contains('seat') && !e.target.classList.contains('occupied')){
 		e.target.classList.toggle('selected');
 		
-		updateselectedcount();	}
-})
+		
+		updateselectedcount()}
+});
