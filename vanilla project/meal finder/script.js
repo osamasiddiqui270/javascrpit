@@ -46,9 +46,50 @@ function searchMeal(e) {
     alert('Please enter a search term');
   }
 }
+//get meal by id
+function getmealbyid(mealId){
+	fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`)
+	.then(res => res.json())
+		.then(data => {
+		const meal = data.meals[0];
+		
+		addmealtodom(meal);
+	})
+}
+//meal by dom
+function addmealtodom(meal){
+	const ingredients = [];
+	
+	for(let i = 1; i <= 20; i++){
+		if(meal[`strIngredient${i}`]){
+		   ingredients.push(`${meal[`strIngredient${i}`]} - ${meal[`strMeasure${i}`]}`);
+		   }else {
+		   break;
+		   }
+	}
 
+single_mealEl.innerHTML = `
+<div class="single-meal">
+   <h1>${meal.strMeal}</h1>
+</div>
+`;
 
+}
 
 // Event listeners
 submit.addEventListener('submit', searchMeal);
+
+mealsEl.addEventListener('click', e => {
+	const mealinfo = e.path.find(item => {
+		if(item.classList){
+			return item.classList.contains('meal-info');
+		}else{
+			return false;
+		}
+	});
+	if(mealinfo){
+		const mealID = mealinfo.getAttribute('data-mealid');
+		getmealbyid(mealID);
+	}
+});
 
